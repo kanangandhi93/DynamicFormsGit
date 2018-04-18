@@ -289,6 +289,7 @@
             this.btnTool.Text = "Button";
             this.btnTool.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTool.ToolTipText = "Add your Button";
+            this.btnTool.Click += new System.EventHandler(this.btnTool_Click);
             // 
             // ComboBoxTool
             // 

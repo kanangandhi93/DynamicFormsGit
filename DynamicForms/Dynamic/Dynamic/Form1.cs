@@ -659,7 +659,7 @@ namespace Dynamic
                             ComboControlNames.Items.Add(gParam[10]);
                         }
                         break;
-                    case "System.Windows.Forms.TextBox": //현재화면 사용가능여부 조회
+                    case "System.Windows.Forms.TextBox": //
                         {
                             var cvt = new FontConverter();
                             //string s = cvt.ConvertToString(this.Font);
@@ -753,11 +753,17 @@ namespace Dynamic
             }
         }
 
+        public string Code = string.Empty;
+
         private void control_Click(object sender, EventArgs e)
         {
             //if (rdoMessage.Checked == true)
             //{
-            RunTimeCodeGenerate("Hi".Trim());
+            frmCode frm = new Dynamic.frmCode();
+            frm.ShowDialog();
+
+            //Not Getting code from previous form.
+            RunTimeCodeGenerate(Code.Trim());
             //}
             //else if (rdoDataTable.Checked == true)
             //{
@@ -793,7 +799,7 @@ namespace Dynamic
                     {
                         public static void Main()
                         {
-                        YourCodeHere
+                        YourCodeHere;
                         }
                     }
                 }
@@ -1022,6 +1028,29 @@ namespace Dynamic
                 propertyGrid1.SelectedObject = null;
                 pnControls.Invalidate();
             }
+        }
+
+        private void btnTool_Click(object sender, EventArgs e)
+        {
+
+            Random rnd = new Random();
+            int randNumber = rnd.Next(1, 1000);
+            String btnName = "btn_" + randNumber;
+
+            Button ctrl = new Button();
+            ctrl.Location = new Point(50, 150);
+            ctrl.Name = btnName;
+            ctrl.Font = new System.Drawing.Font("NativePrinterFontA", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ctrl.Text = "Button";
+            ctrl.MouseEnter += new EventHandler(control_MouseEnter);
+            ctrl.MouseLeave += new EventHandler(control_MouseLeave);
+            ctrl.MouseDown += new MouseEventHandler(control_MouseDown);
+            ctrl.MouseMove += new MouseEventHandler(control_MouseMove);
+            ctrl.MouseUp += new MouseEventHandler(control_MouseUp);
+            ctrl.Click += new EventHandler(control_Click);
+
+            pnControls.Controls.Add(ctrl);
+            ComboControlNames.Items.Add(btnName);
         }
 
         private void DrawControlBorder(object sender)
